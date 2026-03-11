@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Экран "Three Questions" — верстка по макету c возможностью раскрывать панели и вводить ответы.
+
 struct ThreeQuestionsView: View {
     @State private var firstAnswer: String = ""
     @State private var secondAnswer: String = ""
@@ -9,18 +9,18 @@ struct ThreeQuestionsView: View {
     @State private var isDeadlinePickerPresented: Bool = false
     @State private var selectedDeadline: Date = Date()
 
-    // Изначально все панели свернуты, как ты просишь
+  
     @State private var isFirstExpanded: Bool = false
     @State private var isSecondExpanded: Bool = false
     @State private var isThirdExpanded: Bool = false
 
-    /// Данные из экрана создания/редактирования айсберга
+   
     let problemTitle: String
     let aboveItems: [String]
     let belowItems: [String]
-    /// Если не nil — редактируем существующий айсберг
+    
     let existingItem: IcebergItem?
-    /// Коллбек, который вызывается после сохранения айсберга
+    
     var onFinished: (() -> Void)? = nil
 
     @EnvironmentObject private var router: AppRouter
@@ -74,7 +74,7 @@ struct ThreeQuestionsView: View {
                 }
                 .ignoresSafeArea(edges: .bottom)
 
-                // Кастомный picker без дополнительного белого фона от системного sheet
+               
                 if isDeadlinePickerPresented {
                     DeadlinePickerSheet(
                         selectedDate: $selectedDeadline,
@@ -88,7 +88,7 @@ struct ThreeQuestionsView: View {
             }
         }
         .onAppear {
-            // При редактировании предварительно заполняем ответы и дедлайн
+            
             if let item = existingItem, firstAnswer.isEmpty && secondAnswer.isEmpty && thirdAnswer.isEmpty {
                 firstAnswer = item.firstAnswer
                 secondAnswer = item.secondAnswer
@@ -101,9 +101,9 @@ struct ThreeQuestionsView: View {
         }
     }
 
-    // MARK: - Computed
+   
 
-    /// Все три вопроса считаются заполненными, если в каждом есть непустой текст.
+  
     private var areAllQuestionsAnswered: Bool {
         let t1 = firstAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
         let t2 = secondAnswer.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -111,14 +111,14 @@ struct ThreeQuestionsView: View {
         return !t1.isEmpty && !t2.isEmpty && !t3.isEmpty
     }
 
-    /// Форматтер дедлайна вида dd.MM.yy
+   
     private static let deadlineFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yy"
         return formatter
     }()
 
-    // MARK: - Sections
+  
 
     private func headerSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 6 * scale) {
@@ -188,7 +188,7 @@ struct ThreeQuestionsView: View {
                 placeholder: "Describe your very first step..."
             )
 
-            // Панель дедлайна показываем отдельно, когда все три ответы заполнены
+          
             if allAnswered {
                 deadlineSection(scale: scale)
             }
@@ -201,9 +201,9 @@ struct ThreeQuestionsView: View {
                               answer: Binding<String>,
                               isExpanded: Binding<Bool>,
                               placeholder: String) -> some View {
-        // Панель считается заполненной, если в ответе есть непустой текст
+       
         let isCompleted = !answer.wrappedValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        // Нежно‑зеленый фон, когда ответ есть и панель свернута (как на макете)
+       
         let cardBackground = (isCompleted && !isExpanded.wrappedValue)
             ? Color(red: 214/255, green: 246/255, blue: 199/255)
             : Color.white
@@ -276,7 +276,7 @@ struct ThreeQuestionsView: View {
         )
     }
 
-    /// Отдельная секция дедлайна, показывается под тремя вопросами.
+  
     private func deadlineSection(scale: CGFloat) -> some View {
         Button(action: {
             isDeadlinePickerPresented = true
@@ -312,7 +312,7 @@ struct ThreeQuestionsView: View {
         .buttonClickSound()
     }
 
-// MARK: - Deadline Picker Sheet
+
 
 private struct DeadlinePickerSheet: View {
     @Binding var selectedDate: Date
@@ -330,10 +330,11 @@ private struct DeadlinePickerSheet: View {
             let scale = width > 0 ? max(width / 393.0, 0.1) : 1.0
 
             VStack(spacing: 0) {
-                Spacer() // прижимает снизу
+                Spacer()
 
                 VStack(spacing: 8 * scale) {
-                    // Заголовок
+                 
+                    
                     VStack {
                         Text("Pick a time")
                             .font(.system(size: 17 * scale, weight: .medium))
@@ -350,9 +351,9 @@ private struct DeadlinePickerSheet: View {
                         alignment: .bottom
                     )
 
-                    // Кастомный picker: месяц слева, день по центру, год справа
+                   
                     HStack(spacing: 0) {
-                        // Month
+                     
                         Picker(selection: $month, label: EmptyView()) {
                             ForEach(1...12, id: \.self) { m in
                                 Text(monthName(for: m))
@@ -364,7 +365,7 @@ private struct DeadlinePickerSheet: View {
                         .frame(maxWidth: .infinity)
                         .clipped()
 
-                        // Day
+                     
                         Picker(selection: $day, label: EmptyView()) {
                             ForEach(1...daysInCurrentMonth, id: \.self) { d in
                                 Text("\(d)")
@@ -376,7 +377,7 @@ private struct DeadlinePickerSheet: View {
                         .frame(maxWidth: .infinity)
                         .clipped()
 
-                        // Year
+                        
                         Picker(selection: $year, label: EmptyView()) {
                             ForEach(yearRange, id: \.self) { y in
                                 Text(String(format: "%d", y))
@@ -388,9 +389,9 @@ private struct DeadlinePickerSheet: View {
                         .frame(maxWidth: .infinity)
                         .clipped()
                     }
-                    .frame(height: 220 * scale) // как в макете Setup.height
+                    .frame(height: 220 * scale)
 
-                    // Кнопка Save
+                    
                     Button(action: onSave) {
                         Text("Save")
                             .font(.system(size: 16 * scale, weight: .bold))
@@ -405,16 +406,16 @@ private struct DeadlinePickerSheet: View {
                     .buttonStyle(.plain)
                     .buttonClickSound()
                     .padding(.horizontal, 16 * scale)
-                    .frame(height: 50 * scale) // высота кнопки из макета
+                    .frame(height: 50 * scale)
                 }
                 .padding(.horizontal, 16 * scale)
-                .frame(width: width, height: 354 * scale) // как в макете: ширина экрана, высота 354
-                .background(Color(red: 237/255, green: 237/255, blue: 237/255)) // #EDEDED
+                .frame(width: width, height: 354 * scale)
+                .background(Color(red: 237/255, green: 237/255, blue: 237/255))
                 .cornerRadius(8 * scale, corners: [.topLeft, .topRight])
             }
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                // Инициализируем колесики из выбранной даты
+               
                 let components = calendar.dateComponents([.year, .month, .day], from: selectedDate)
                 year = components.year ?? year
                 month = components.month ?? month
@@ -432,7 +433,7 @@ private struct DeadlinePickerSheet: View {
         }
     }
 
-    // MARK: - Helpers
+ 
 
     private var daysInCurrentMonth: Int {
         let components = DateComponents(year: year, month: month)
@@ -442,7 +443,7 @@ private struct DeadlinePickerSheet: View {
 
     private var yearRange: [Int] {
         let current = Calendar.current.component(.year, from: Date())
-        // Диапазон ±4 года от текущего (как на скрине 2024–2028)
+        
         return Array((current - 1)...(current + 3))
     }
 
@@ -453,7 +454,7 @@ private struct DeadlinePickerSheet: View {
     }
 
     private func normalizeAndUpdateDate() {
-        // Не даем дню выйти за пределы месяца
+     
         let maxDay = daysInCurrentMonth
         if day > maxDay {
             day = maxDay
@@ -568,7 +569,7 @@ private struct DeadlinePickerSheet: View {
     }
 }
 
-// Удобный хелпер для скругления только верхних углов у шита
+
 private extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))

@@ -1,11 +1,9 @@
 import SwiftUI
 
-/// Онбординг из трёх экранов с картинками `onboarding1/2/3`.
-/// После последнего экрана открывается `IcebergArchiveView`.
+
 struct OnboardingView: View {
     @State private var currentPage: Int = 0
-    /// Коллбек, который вызывается после завершения онбординга.
-    /// В корневом `RootView` он переключает приложение на основную часть.
+
     var onFinish: (() -> Void)? = nil
 
     var body: some View {
@@ -51,7 +49,7 @@ struct OnboardingView: View {
     }
 }
 
-/// Один экран онбординга, общая верстка и логика.
+
 private struct OnboardingPageView: View {
     let imageName: String
     let title: String

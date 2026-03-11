@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Скругление только нижних углов
+
 struct BottomRoundedRectangle: Shape {
     var cornerRadius: CGFloat = 40
 
@@ -18,7 +18,7 @@ struct OnboardingFirstView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                // Картинка без отступа сверху, во всю ширину, с закруглением только нижних углов
+                
                 Image("onboarding1")
                     .resizable()
                     .scaledToFill()
@@ -48,7 +48,7 @@ struct OnboardingFirstView: View {
                 Spacer()
 
                 Button(action: {
-                    // Next action will be wired up by parent container
+              
                 }) {
                     Text("Next")
                         .font(.system(size: 20, weight: .semibold))

@@ -1,14 +1,14 @@
 import Foundation
 import SwiftUI
 
-/// Статус айсберга/проблемы.
+
 enum IcebergStatus: String, Codable {
     case inProgress
     case solved
     case notSolved
 }
 
-/// Модель одной записи в архиве.
+
 struct IcebergItem: Identifiable, Equatable, Codable {
     let id: UUID
     var title: String
@@ -50,7 +50,7 @@ struct IcebergItem: Identifiable, Equatable, Codable {
     }
 }
 
-/// Хранилище айсбергов, доступное через EnvironmentObject.
+
 final class IcebergStore: ObservableObject {
     @Published var items: [IcebergItem] = [] {
         didSet {

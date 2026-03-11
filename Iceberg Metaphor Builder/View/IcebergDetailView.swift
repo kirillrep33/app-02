@@ -1,9 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// Детальный экран проблемы "Conflict at work".
-/// Верстка максимально повторяет предоставленный макет 390×844,
-/// все размеры и отступы масштабируются от ширины экрана через `scale`.
+
 struct IcebergDetailView: View {
     let item: IcebergItem
     @EnvironmentObject private var router: AppRouter
@@ -21,7 +19,7 @@ struct IcebergDetailView: View {
             let scale = width > 0 ? max(width / 390.0, 0.1) : 1.0
 
             ZStack {
-                // Фон экрана
+           
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 239/255, green: 246/255, blue: 255/255),
@@ -84,7 +82,7 @@ struct IcebergDetailView: View {
         }
     }
 
-    // MARK: - Header
+  
 
     private func headerSection(scale: CGFloat) -> some View {
         ZStack {
@@ -181,7 +179,7 @@ struct IcebergDetailView: View {
         }
     }
 
-    // MARK: - Status section
+ 
 
     private func statusSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 8 * scale) {
@@ -235,11 +233,11 @@ struct IcebergDetailView: View {
             .foregroundColor(isActive ? .white : Color(red: 52/255, green: 130/255, blue: 255/255))
     }
 
-    // MARK: - Above / Below water cards
+  
 
     private func icebergCardsSection(scale: CGFloat) -> some View {
         VStack(spacing: 0) {
-            // Верхняя половина карточки: белый фон, скругление только по верхним углам
+           
             VStack(alignment: .leading, spacing: 8 * scale) {
                 Text("Above Water 🌊")
                     .font(.system(size: 16 * scale, weight: .medium))
@@ -256,7 +254,7 @@ struct IcebergDetailView: View {
             .padding(.vertical, 14 * scale)
             .background(Color.white)
 
-            // Нижняя половина карточки: синий градиент, скругление только по нижним углам
+            
             VStack(alignment: .leading, spacing: 8 * scale) {
                 Text("Below Water 🧊")
                     .font(.system(size: 16 * scale, weight: .medium))
@@ -282,8 +280,7 @@ struct IcebergDetailView: View {
                 )
             )
         }
-        // Общая карточка с единым скруглением краёв и без скругления в месте стыка панелей.
-        // Высота растёт от контента (как в CreateIcebergView), минимальная визуально ~166pt.
+
         .frame(width: 327 * scale)
         .background(
             RoundedRectangle(cornerRadius: 20 * scale, style: .continuous)
@@ -296,13 +293,13 @@ struct IcebergDetailView: View {
                 y: 1 * scale)
     }
 
-    // MARK: - Q&A section
+
 
     @State private var isQASectionExpanded: Bool = false
     
     private func qaSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 12 * scale) {
-            // Заголовок панели
+        
             Button(action: {
                 isQASectionExpanded.toggle()
             }) {
@@ -328,7 +325,7 @@ struct IcebergDetailView: View {
             .buttonStyle(.plain)
             .buttonClickSound()
             
-            // Развёрнутая часть
+     
             if isQASectionExpanded {
                 VStack(alignment: .leading, spacing: 4 * scale) {
                     if !item.firstAnswer.isEmpty {
@@ -375,8 +372,7 @@ struct IcebergDetailView: View {
         }
     }
 
-    // MARK: - Solution Note
-
+    
     private func solutionNoteSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 8 * scale) {
             HStack {
@@ -387,7 +383,7 @@ struct IcebergDetailView: View {
                 Spacer()
 
                 Button {
-                    // Открываем редактор заметки, подставляя существующий текст (если есть)
+                  
                     solutionNoteDraft = localSolutionNote ?? ""
                     isEditingSolutionNote = true
                 } label: {
@@ -400,7 +396,7 @@ struct IcebergDetailView: View {
             }
 
             if isEditingSolutionNote {
-                // Панель ввода Solution Note по макету
+                
                 VStack(alignment: .leading, spacing: 12 * scale) {
                     ZStack(alignment: .topLeading) {
                         RoundedRectangle(cornerRadius: 20 * scale, style: .continuous)
@@ -448,7 +444,7 @@ struct IcebergDetailView: View {
                     .buttonClickSound()
                 }
             } else if let note = localSolutionNote, !note.isEmpty {
-                // Отображаем сохранённую заметку под заголовком
+               
                 Text(note)
                     .font(.system(size: 12 * scale, weight: .regular))
                     .foregroundColor(Color(red: 143/255, green: 143/255, blue: 143/255))
@@ -457,7 +453,7 @@ struct IcebergDetailView: View {
         }
     }
 
-    // MARK: - Meta info
+   
 
     private func metaInfoSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 12 * scale) {
@@ -495,7 +491,7 @@ struct IcebergDetailView: View {
         }
     }
 
-    // MARK: - Export button
+    
 
     private func exportButton(scale: CGFloat) -> some View {
         Button(action: {
@@ -522,45 +518,45 @@ struct IcebergDetailView: View {
     }
     
     private func captureScreenContent() {
-        // Небольшая задержка для завершения анимаций
+      
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else {
-                print("❌ Failed to get window")
+               
                 return
             }
             
-            // Захватываем весь экран окна
+          
             let bounds = window.bounds
             let renderer = UIGraphicsImageRenderer(bounds: bounds)
             
-            // Используем drawHierarchy для более точного захвата
+          
             let image = renderer.image { context in
                 window.drawHierarchy(in: bounds, afterScreenUpdates: false)
             }
             
-            // Проверяем, что изображение создано и не пустое
+           
             guard image.size.width > 0 && image.size.height > 0 else {
-                print("❌ Captured image is empty")
+               
                 return
             }
             
-            print("✅ Image captured successfully: \(image.size)")
+            
             shareImage = image
         }
     }
 
-    // MARK: - Bottom bar
+   
 
     private func detailBottomBar(scale: CGFloat) -> some  View {
         VStack(spacing: 0) {
-            // Тонкая синяя линия сверху
+          
             Rectangle()
                 .fill(Color(red: 187/255, green: 212/255, blue: 255/255))
                 .frame(height: 1 * scale)
 
             HStack {
-                // Левая вкладка Archive
+              
                 Button {
                     router.selectedTab = .archive
                 } label: {
@@ -577,7 +573,7 @@ struct IcebergDetailView: View {
                 .buttonStyle(.plain)
                 .buttonClickSound()
 
-                // Правая вкладка Stats
+              
                 Button {
                     router.selectedTab = .stats
                 } label: {
@@ -604,17 +600,17 @@ struct IcebergDetailView: View {
     }
 }
 
-// MARK: - ActivityView for sharing PNG
+
 
 private struct ActivityView: UIViewControllerRepresentable {
     let activityItems: [Any]
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        print("📤 Creating ActivityView with \(activityItems.count) items")
+       
         
         let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
-        // Настройка для iPad (popover)
+       
         if let popover = controller.popoverPresentationController {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let window = windowScene.windows.first {
@@ -629,12 +625,12 @@ private struct ActivityView: UIViewControllerRepresentable {
             }
         }
         
-        // Обработчик завершения для отладки
+      
         controller.completionWithItemsHandler = { activityType, completed, returnedItems, error in
             if let error = error {
-                print("❌ ActivityView error: \(error)")
+                print("")
             } else {
-                print("✅ ActivityView completed: \(completed), type: \(String(describing: activityType))")
+                print("")
             }
         }
         
@@ -644,7 +640,7 @@ private struct ActivityView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
-// MARK: - UIImage Identifiable Extension
+
 
 extension UIImage: Identifiable {
     public var id: ObjectIdentifier {
@@ -652,7 +648,7 @@ extension UIImage: Identifiable {
     }
 }
 
-// MARK: - Preview
+
 
 #Preview {
     IcebergDetailView(item: IcebergItem(

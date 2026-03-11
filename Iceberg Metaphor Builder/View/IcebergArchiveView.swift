@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Фильтр для статуса записей.
+
 enum FilterStatus {
     case all
     case inProgress
@@ -8,8 +8,7 @@ enum FilterStatus {
     case notSolved
 }
 
-/// Главный экран "Iceberg Archive".
-/// Пока без логики и навигации — только верстка, которая масштабируется по ширине экрана через GeometryReader.
+
 struct IcebergArchiveView: View {
     let isEmpty: Bool
 
@@ -25,9 +24,9 @@ struct IcebergArchiveView: View {
         self.isEmpty = empty
     }
     
-    /// Отфильтрованные записи в зависимости от выбранного фильтра.
+  
     private var filteredItems: [IcebergItem] {
-        // Сначала фильтрация по статусу
+      
         let statusFiltered: [IcebergItem] = {
             switch selectedFilter {
             case .all:
@@ -41,7 +40,7 @@ struct IcebergArchiveView: View {
             }
         }()
 
-        // Затем — по строке поиска (по заголовку и Above/Below)
+     
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return statusFiltered }
 
@@ -63,16 +62,16 @@ struct IcebergArchiveView: View {
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width
-            // Базовый коэффициент от ширины iPhone 15 Pro (примерно 393pt)
+         
             let scale = width > 0 ? max(width / 393.0, 0.1) : 1.0
 
             NavigationStack {
                 ZStack {
-                    // Фон
+              
                     Color(red: 244/255, green: 248/255, blue: 255/255)
 
                     VStack(spacing: 0) {
-                        // Верхний контент
+                     
                         ScrollView(.vertical, showsIndicators: false) {
                             VStack(alignment: .leading, spacing: 0) {
                                 headerSection(scale: scale)
@@ -98,7 +97,7 @@ struct IcebergArchiveView: View {
                             .padding(.horizontal, 24 * scale)
                         }
 
-                        // Нижняя вкладочная панель
+                  
                         bottomTabBar(scale: scale)
                             .padding(.bottom, max(geo.safeAreaInsets.bottom, 8 * scale))
                             .background(
@@ -109,7 +108,7 @@ struct IcebergArchiveView: View {
                                             y: -2 * scale)
                             )
                     }
-                    // VStack должен игнорировать safe area только снизу
+                   
                     .ignoresSafeArea(edges: .bottom)
                     .fullScreenCover(isPresented: $isPresentingCreate) {
                         CreateIcebergView(onFinished: {
@@ -128,7 +127,7 @@ struct IcebergArchiveView: View {
         }
     }
 
-    // MARK: - Sections
+    
 
     private func headerSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 6 * scale) {
@@ -165,7 +164,7 @@ struct IcebergArchiveView: View {
                            filter: .notSolved,
                            scale: scale)
             }
-            // Внутренние отступы, чтобы первая и последняя кнопка не подрезались
+        
             .padding(.horizontal, 2 * scale)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -205,7 +204,7 @@ struct IcebergArchiveView: View {
         )
     }
 
-    // Секция со списком проблем (две карточки, как на скриншоте)
+   
     private func problemsListSection(scale: CGFloat) -> some View {
         VStack(spacing: 20 * scale) {
             ForEach(filteredItems) { item in
@@ -265,13 +264,13 @@ struct IcebergArchiveView: View {
 
     private func bottomTabBar(scale: CGFloat) -> some View {
         VStack(spacing: 0) {
-            // Тонкая синяя линия сверху
+         
             Rectangle()
                 .fill(Color(red: 187/255, green: 212/255, blue: 255/255))
                 .frame(height: 1 * scale)
 
             HStack {
-                // Левая вкладка Archive
+             
                 Button {
                     router.selectedTab = .archive
                 } label: {
@@ -288,7 +287,7 @@ struct IcebergArchiveView: View {
                 .buttonStyle(.plain)
                 .buttonClickSound()
 
-                // Центральная круглая кнопка "+"
+           
                 Button {
                     isPresentingCreate = true
                 } label: {
@@ -306,7 +305,7 @@ struct IcebergArchiveView: View {
                 .buttonClickSound()
                 .frame(maxWidth: .infinity)
 
-                // Правая вкладка Stats
+             
                 Button {
                     router.selectedTab = .stats
                 } label: {
@@ -332,7 +331,7 @@ struct IcebergArchiveView: View {
 
     }
 
-    // MARK: - Subviews
+   
 
     private func filterChip(title: String,
                             color: Color,
@@ -375,7 +374,7 @@ struct IcebergArchiveView: View {
     }
 }
 
-// MARK: - Отдельный свайпабельный элемент карточки
+
 
 private struct SwipeableProblemCard: View {
     let scale: CGFloat
@@ -402,7 +401,7 @@ private struct SwipeableProblemCard: View {
 
     var body: some View {
         ZStack {
-            // Левая часть — три круглые кнопки статуса, появляются только при свайпе вправо
+      
             if offset > 0 {
                 HStack(spacing: 8 * scale) {
                     Button(action: {
@@ -441,7 +440,7 @@ private struct SwipeableProblemCard: View {
                 .transition(.opacity.combined(with: .move(edge: .leading)))
             }
 
-            // Правая часть — кнопка удаления, появляется только при свайпе влево
+         
             if offset < 0 {
                 HStack {
                     Spacer()
@@ -473,8 +472,7 @@ private struct SwipeableProblemCard: View {
             problemCardContent
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    // Открываем детали только когда карточка в исходном положении,
-                    // чтобы не конфликтовать со свайпами.
+
                     if offset == 0 {
                         onTap()
                     }
@@ -488,16 +486,16 @@ private struct SwipeableProblemCard: View {
                     let translation = value.translation.width
 
                     if translation < 0 {
-                        // тянем влево — показываем delete
+                     
                         offset = max(translation, -maxOffset)
                     } else {
-                        // тянем вправо — показываем статусные кнопки
+                       
                         offset = min(translation, maxRightOffset)
                     }
                 }
                 .onEnded { value in
                     let translation = value.translation.width
-                    // если тянули влево
+                
                     if translation < 0 {
                         if translation < -maxOffset / 2 {
                             offset = -maxOffset
@@ -505,7 +503,7 @@ private struct SwipeableProblemCard: View {
                             offset = 0
                         }
                     } else {
-                        // тянули вправо
+                     
                         if translation > maxRightOffset / 2 {
                             offset = maxRightOffset
                         } else {
@@ -527,14 +525,14 @@ private struct SwipeableProblemCard: View {
                         y: 8 * scale)
 
             HStack(alignment: .top, spacing: 16 * scale) {
-                // Ледяной кубик слева
+              
                 Image("ice")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 52 * scale, height: 52 * scale)
 
                 VStack(alignment: .leading, spacing: 12 * scale) {
-                    // Заголовок и статус
+                  
                     HStack(alignment: .center) {
                         Text(title)
                             .font(.system(size: 18 * scale, weight: .semibold))
@@ -603,7 +601,7 @@ private struct SwipeableProblemCard: View {
     }
 }
 
-// MARK: - Preview
+
 
 #Preview {
     IcebergArchiveView()

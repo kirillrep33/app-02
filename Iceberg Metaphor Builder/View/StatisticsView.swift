@@ -1,14 +1,13 @@
 import SwiftUI
 
-/// Экран "Statistics".
-/// Показывает либо пустое состояние, либо полноценную статистику — по булевой переменной `hasData`.
+
 struct StatisticsView: View {
     @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var store: IcebergStore
 
     @State private var isPresentingCreate: Bool = false
 
-    // MARK: - Derived stats
+
 
     private var totalCount: Int {
         store.items.count
@@ -56,7 +55,7 @@ struct StatisticsView: View {
         return Int(round(days))
     }
 
-    /// Самый продуктивный месяц по количеству решённых айсбергов.
+   
     private var mostProductiveMonthInfo: (label: String, count: Int)? {
         guard !solvedItems.isEmpty else { return nil }
 
@@ -94,7 +93,7 @@ struct StatisticsView: View {
             let scale = width > 0 ? max(width / 393.0, 0.1) : 1.0
 
             ZStack {
-                // Фон как на остальных экранах: мягкий градиент сверху вниз
+              
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 239/255, green: 246/255, blue: 255/255),
@@ -150,7 +149,7 @@ struct StatisticsView: View {
         }
     }
 
-    // MARK: - Header
+  
 
     private func headerSection(scale: CGFloat) -> some View {
         HStack {
@@ -162,11 +161,11 @@ struct StatisticsView: View {
         }
     }
 
-    // MARK: - Content with data
+ 
 
     private func contentWithData(scale: CGFloat, availableHeight: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 24 * scale) {
-            // Status Distribution
+       
             VStack(alignment: .leading, spacing: 16 * scale) {
                 Text("Status Distribution")
                     .font(.system(size: 22 * scale, weight: .semibold))
@@ -176,7 +175,7 @@ struct StatisticsView: View {
             }
             .padding(.horizontal, 24 * scale)
 
-            // Key Metrics
+          
             VStack(alignment: .leading, spacing: 16 * scale) {
                 Text("Key Metrics")
                     .font(.system(size: 22 * scale, weight: .semibold))
@@ -186,7 +185,7 @@ struct StatisticsView: View {
             }
             .padding(.horizontal, 24 * scale)
 
-            // Most Productive Month
+        
             VStack(alignment: .leading, spacing: 16 * scale) {
                 Text("Most Productive Month")
                     .font(.system(size: 22 * scale, weight: .semibold))
@@ -206,14 +205,14 @@ struct StatisticsView: View {
         let inProgressShare = total > 0 ? Double(inProgressCount) / total : 0
         let solvedShare = total > 0 ? Double(solvedCount) / total : 0
 
-        // Предрасчёт диапазонов срезов (0...1) без мутаций внутри ViewBuilder
+   
         let notSolvedRange = (from: 0.0, to: notSolvedShare)
         let inProgressRange = (from: notSolvedShare, to: notSolvedShare + inProgressShare)
         let solvedRange = (from: notSolvedShare + inProgressShare,
                            to: notSolvedShare + inProgressShare + solvedShare)
 
         return ZStack {
-            // Карточка 350×291, радиус 20, как в макете
+          
             RoundedRectangle(cornerRadius: 20 * scale, style: .continuous)
                 .fill(Color.white)
                 .shadow(color: Color.black.opacity(0.25),
@@ -222,45 +221,45 @@ struct StatisticsView: View {
                         y: 1 * scale)
 
             VStack(spacing: 24 * scale) {
-                // Кольцевая диаграмма по центру в верхней части панели
+              
                 HStack {
                     Spacer()
                     ZStack {
                         if total > 0 {
-                            // Красный сегмент (Not Solved)
+                          
                             if notSolvedShare > 0 {
                                 Circle()
                                     .trim(from: notSolvedRange.from, to: notSolvedRange.to)
                                     .stroke(
-                                        Color(red: 1.0, green: 77/255, blue: 77/255), // #FF4D4D
+                                        Color(red: 1.0, green: 77/255, blue: 77/255),
                                         style: StrokeStyle(lineWidth: 38 * scale, lineCap: .butt)
                                     )
                                     .rotationEffect(.degrees(-90))
                             }
 
-                            // Жёлтый сегмент (In Progress)
+                          
                             if inProgressShare > 0 {
                                 Circle()
                                     .trim(from: inProgressRange.from, to: inProgressRange.to)
                                     .stroke(
-                                        Color(red: 244/255, green: 237/255, blue: 25/255), // #F4ED19
+                                        Color(red: 244/255, green: 237/255, blue: 25/255),
                                         style: StrokeStyle(lineWidth: 38 * scale, lineCap: .butt)
                                     )
                                     .rotationEffect(.degrees(-90))
                             }
 
-                            // Зелёный сегмент (Solved)
+                           
                             if solvedShare > 0 {
                                 Circle()
                                     .trim(from: solvedRange.from, to: solvedRange.to)
                                     .stroke(
-                                        Color(red: 75/255, green: 225/255, blue: 65/255), // #4BE141
+                                        Color(red: 75/255, green: 225/255, blue: 65/255),
                                         style: StrokeStyle(lineWidth: 38 * scale, lineCap: .butt)
                                     )
                                     .rotationEffect(.degrees(-90))
                             }
                         } else {
-                            // Пустое состояние — серое кольцо
+                            
                             Circle()
                                 .stroke(
                                     Color.gray.opacity(0.2),
@@ -274,7 +273,7 @@ struct StatisticsView: View {
                 }
                 .padding(.top, 20 * scale)
 
-                // Легенда ниже диаграммы
+                
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 11 * scale) {
                         legendRow(
@@ -301,7 +300,7 @@ struct StatisticsView: View {
                 }
                 .padding(.bottom, 16 * scale)
             }
-            .padding(.horizontal, 15 * scale) // 35 (Figma) − 20 (левая рамка панели)
+            .padding(.horizontal, 15 * scale)
         }
         .frame(width: 350 * scale, height: 291 * scale)
     }
@@ -326,7 +325,7 @@ struct StatisticsView: View {
 
 
 
-    // MARK: - Key Metrics
+ 
 
     private func keyMetricsGrid(scale: CGFloat) -> some View {
         VStack(spacing: 16 * scale) {
@@ -383,7 +382,7 @@ struct StatisticsView: View {
         )
     }
 
-    // MARK: - Most productive month
+
 
     private func mostProductiveCard(scale: CGFloat) -> some View {
         ZStack {
@@ -420,7 +419,7 @@ struct StatisticsView: View {
         .frame(height: 150 * scale)
     }
 
-    // MARK: - Empty state
+  
 
     private func emptyStateSection(scale: CGFloat, availableHeight: CGFloat) -> some View {
         VStack(spacing: 20 * scale) {
@@ -444,18 +443,17 @@ struct StatisticsView: View {
         .frame(minHeight: availableHeight * 0.35)
     }
 
-    // MARK: - Bottom tab bar
 
-    /// Таб‑бар внизу с активной вкладкой Stats и центральной кнопкой‑плюсом.
+  
     private func statisticsBottomTabBar(scale: CGFloat, onAddTapped: @escaping () -> Void) -> some View {
         VStack(spacing: 0) {
-            // Тонкая синяя линия сверху
+            
             Rectangle()
                 .fill(Color(red: 187/255, green: 212/255, blue: 255/255))
                 .frame(height: 1 * scale)
 
             HStack {
-                // Левая вкладка Archive
+                
                 Button {
                     router.selectedTab = .archive
                 } label: {
@@ -472,7 +470,7 @@ struct StatisticsView: View {
                 .buttonStyle(.plain)
                 .buttonClickSound()
 
-                // Центральная круглая кнопка "+"
+             
                 Button(action: {
                     onAddTapped()
                 }) {
@@ -490,7 +488,7 @@ struct StatisticsView: View {
                 .buttonStyle(.plain)
                 .buttonClickSound()
 
-                // Правая вкладка Stats
+                
                 Button {
                     router.selectedTab = .stats
                 } label: {
@@ -516,7 +514,6 @@ struct StatisticsView: View {
     }
 }
 
-// MARK: - Preview
 
 #Preview {
     StatisticsView()

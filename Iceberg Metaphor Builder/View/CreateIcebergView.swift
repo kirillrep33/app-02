@@ -1,7 +1,6 @@
 import SwiftUI
 
-/// Экран "Create Iceberg" — чистая верстка без логики.
-/// Повторяет интерфейс с макета: шапка, поля проблемы, блоки Above/Below Water и нижняя панель.
+
 struct CreateIcebergView: View {
     @State private var problemText: String = ""
     @State private var aboveItems: [String] = [""]
@@ -12,9 +11,9 @@ struct CreateIcebergView: View {
     @EnvironmentObject private var store: IcebergStore
     @Environment(\.dismiss) private var dismiss
 
-    /// Редактируемый айсберг (nil — режим создания нового).
+    
     let existingItem: IcebergItem?
-    /// Коллбек, который вызывается после полного создания/редактирования айсберга.
+
     var onFinished: (() -> Void)? = nil
 
     init(existingItem: IcebergItem? = nil, onFinished: (() -> Void)? = nil) {
@@ -38,10 +37,10 @@ struct CreateIcebergView: View {
             let scale = width > 0 ? max(width / 393.0, 0.1) : 1.0
 
             ZStack {
-                // Фон экрана (как в макете: градиент от #EFF6FF к #FFFFFF)
+
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Color(red: 239/255, green: 246/255, blue: 255/255), // #EFF6FF
+                        Color(red: 239/255, green: 246/255, blue: 255/255),
                         Color.white
                     ]),
                     startPoint: .top,
@@ -62,14 +61,14 @@ struct CreateIcebergView: View {
 
                             icebergPanelSection(scale: scale)
                                 .padding(.top, 24 * scale)
-                                // центрируем панель по горизонтали, Figma width = 327
+                       
                                 .frame(maxWidth: .infinity, alignment: .center)
 
                             Spacer(minLength: 120 * scale)
                         }
                     }
 
-                    // Нижняя часть: кнопка Continue и таб‑бар
+           
                     VStack(spacing: 0) {
                         continueButtonSection(scale: scale)
                             .padding(.horizontal, 24 * scale)
@@ -93,7 +92,7 @@ struct CreateIcebergView: View {
                         belowItems: belowItems,
                         existingItem: existingItem,
                         onFinished: {
-                            // Закрываем экран создания и возвращаемся в архив
+                           
                             onFinished?()
                             dismiss()
                         }
@@ -105,9 +104,9 @@ struct CreateIcebergView: View {
         }
     }
 
-    // MARK: - Computed
+  
 
-    /// Кнопка Continue активна, когда во всех панелях (Above/Below) есть текст.
+   
     private var areAllPanelsFilled: Bool {
         let trimmedAbove = aboveItems.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
         let trimmedBelow = belowItems.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -115,7 +114,7 @@ struct CreateIcebergView: View {
                !trimmedBelow.contains(where: { $0.isEmpty })
     }
 
-    // MARK: - Sections
+  
 
     private func headerSection(scale: CGFloat) -> some View {
         HStack(spacing: 16 * scale) {
@@ -124,7 +123,7 @@ struct CreateIcebergView: View {
             } label: {
                 ZStack {
                     Circle()
-                        .fill(Color(red: 52/255, green: 130/255, blue: 255/255)) // #3482FF
+                        .fill(Color(red: 52/255, green: 130/255, blue: 255/255))
                         .shadow(color: Color.black.opacity(0.1),
                                 radius: 3 * scale,
                                 x: 0,
@@ -134,7 +133,7 @@ struct CreateIcebergView: View {
                         .frame(width: 20 * scale, height: 20 * scale)
                         .foregroundColor(.white)
                 }
-                // 40×40 в макете
+               
                 .frame(width: 40 * scale, height: 40 * scale)
             }
             .buttonStyle(.plain)
@@ -159,7 +158,7 @@ struct CreateIcebergView: View {
                           text: $problemText)
                     .font(.system(size: 12 * scale))
                     .padding(.horizontal, 12 * scale)
-                    // 34pt высота поля, радиус 10
+                  
                     .frame(height: 34 * scale)
                     .background(
                         RoundedRectangle(cornerRadius: 10 * scale, style: .continuous)
@@ -181,7 +180,7 @@ struct CreateIcebergView: View {
         }
     }
 
-    // Общая панель Above / Below Water как на макете (единая карточка)
+  
     private func icebergPanelSection(scale: CGFloat) -> some View {
         VStack(spacing: 0) {
             aboveWaterSection(scale: scale)
@@ -213,7 +212,7 @@ struct CreateIcebergView: View {
                 )
         )
         .clipShape(RoundedRectangle(cornerRadius: 20 * scale, style: .continuous))
-        // Фиксируем только ширину по макету, высота растет от контента
+       
         .frame(width: 327 * scale)
         .shadow(color: Color.black.opacity(0.25),
                 radius: 4 * scale,
@@ -221,7 +220,7 @@ struct CreateIcebergView: View {
                 y: 1 * scale)
     }
 
-    // Внутренняя верхняя часть панели
+  
     private func aboveWaterSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 8 * scale) {
@@ -234,7 +233,7 @@ struct CreateIcebergView: View {
                         .font(.system(size: 13 * scale))
                         .foregroundColor(Color.black.opacity(0.5))
                 }
-                // ширина блока текста 255, отступ слева 60 - 32 = 28
+              
                 .frame(width: 255 * scale, alignment: .leading)
 
                 ForEach(aboveItems.indices, id: \.self) { index in
@@ -243,7 +242,7 @@ struct CreateIcebergView: View {
                             TextField("", text: $aboveItems[index])
                                 .font(.system(size: 12 * scale))
                                 .padding(.horizontal, 12 * scale)
-                                // высота поля 34, радиус 10, ширина 270
+                              
                                 .frame(width: 270 * scale, height: 34 * scale, alignment: .leading)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10 * scale, style: .continuous)
@@ -263,7 +262,7 @@ struct CreateIcebergView: View {
                             }
                         }
 
-                        // Кнопка удаления справа, доступна только для дополнительных панелей
+                       
                         if index > 0 {
                             Button {
                                 aboveItems.remove(at: index)
@@ -280,7 +279,7 @@ struct CreateIcebergView: View {
                     .padding(.top, index == 0 ? 0 : 8 * scale)
                 }
             }
-            .padding(.top, 20 * scale) // отступ от верхней границы белой части
+            .padding(.top, 20 * scale)
 
             Button(action: {
                 aboveItems.append("")
@@ -288,7 +287,7 @@ struct CreateIcebergView: View {
                 Text("+ Add item")
                     .font(.system(size: 14 * scale, weight: .bold))
                     .foregroundColor(.white)
-                    // ширина кнопки 238, высота 34, центр внутри панели
+                 
                     .frame(width: 238 * scale, height: 34 * scale)
                     .background(
                         RoundedRectangle(cornerRadius: 60 * scale, style: .continuous)
@@ -297,13 +296,13 @@ struct CreateIcebergView: View {
             }
             .buttonStyle(.plain)
             .buttonClickSound()
-            .padding(.top, 12 * scale) // расстояние между полем и кнопкой
+            .padding(.top, 12 * scale)
         }
-        // внутренний левый отступ 28 как в макете (60 - 32)
+       
         .padding(.leading, 28 * scale)
     }
 
-    // Внутренняя нижняя часть панели
+   
     private func belowWaterSection(scale: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 8 * scale) {
@@ -316,7 +315,7 @@ struct CreateIcebergView: View {
                         .font(.system(size: 13 * scale))
                         .foregroundColor(Color.white.opacity(0.9))
                 }
-                // ширина блока текста 170, тот же левый отступ 28
+              
                 .frame(width: 170 * scale, alignment: .leading)
 
                 ForEach(belowItems.indices, id: \.self) { index in
@@ -326,7 +325,7 @@ struct CreateIcebergView: View {
                                 .font(.system(size: 12 * scale))
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 12 * scale)
-                                // высота 34, радиус 10, градиентный фон как в макете
+                               
                                 .frame(width: 270 * scale, height: 34 * scale, alignment: .leading)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10 * scale, style: .continuous)
@@ -379,7 +378,7 @@ struct CreateIcebergView: View {
                 Text("+ Add item")
                     .font(.system(size: 14 * scale, weight: .bold))
                     .foregroundColor(Color(red: 26/255, green: 115/255, blue: 232/255))
-                    // ширина 238, высота 34
+                 
                     .frame(width: 238 * scale, height: 34 * scale)
                     .background(
                         RoundedRectangle(cornerRadius: 60 * scale, style: .continuous)
@@ -390,7 +389,7 @@ struct CreateIcebergView: View {
             .buttonClickSound()
             .padding(.top, 12 * scale)
         }
-        // такой же левый отступ 28, как и в верхней части панели
+        
         .padding(.leading, 28 * scale)
     }
 
@@ -408,7 +407,7 @@ struct CreateIcebergView: View {
                 .font(.system(size: 20 * scale, weight: .bold))
                 .foregroundColor(.white.opacity(0.9))
                 .frame(maxWidth: .infinity)
-                // 50pt высота, радиус 60
+             
                 .frame(height: 50 * scale)
                 .background(
                     RoundedRectangle(cornerRadius: 60 * scale, style: .continuous)
@@ -421,13 +420,13 @@ struct CreateIcebergView: View {
 
     private func bottomTabBar(scale: CGFloat) -> some View {
         VStack(spacing: 0) {
-            // Тонкая синяя линия сверху
+          
             Rectangle()
                 .fill(Color(red: 187/255, green: 212/255, blue: 255/255))
                 .frame(height: 1 * scale)
 
             HStack {
-                // Левая вкладка Archive
+               
                 Button {
                     router.selectedTab = .archive
                 } label: {
@@ -444,7 +443,7 @@ struct CreateIcebergView: View {
                 .buttonStyle(.plain)
                 .buttonClickSound()
 
-                // Правая вкладка Stats
+              
                 Button {
                     router.selectedTab = .stats
                 } label: {
@@ -471,7 +470,7 @@ struct CreateIcebergView: View {
     }
 }
 
-// MARK: - Preview
+
 
 #Preview {
     CreateIcebergView()
