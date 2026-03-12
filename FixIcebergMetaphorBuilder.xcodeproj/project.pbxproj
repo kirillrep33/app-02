@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52CB1DA22F61EFFD004EE8D5 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52CB1DA12F61EFFD004EE8D5 /* button.mp3 */; };
+		52CC44BF2F631166002845D4 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52CC44BE2F631166002845D4 /* button.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5288428E2F61580C00AE258D /* Iceberg Metaphor Builder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Iceberg Metaphor Builder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52CB1DA12F61EFFD004EE8D5 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
+		52CC446E2F631126002845D4 /* FixIcebergMetaphorBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FixIcebergMetaphorBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52CC44BE2F631166002845D4 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		528842902F61580C00AE258D /* Iceberg Metaphor Builder */ = {
+		52CC44702F631126002845D4 /* FixIcebergMetaphorBuilder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Iceberg Metaphor Builder";
+			path = FixIcebergMetaphorBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5288428B2F61580C00AE258D /* Frameworks */ = {
+		52CC446B2F631126002845D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -34,19 +34,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		528842852F61580C00AE258D = {
+		52CC44652F631125002845D4 = {
 			isa = PBXGroup;
 			children = (
-				528842902F61580C00AE258D /* Iceberg Metaphor Builder */,
-				5288428F2F61580C00AE258D /* Products */,
-				52CB1DA12F61EFFD004EE8D5 /* button.mp3 */,
+				52CC44702F631126002845D4 /* FixIcebergMetaphorBuilder */,
+				52CC446F2F631126002845D4 /* Products */,
+				52CC44BE2F631166002845D4 /* button.mp3 */,
 			);
 			sourceTree = "<group>";
 		};
-		5288428F2F61580C00AE258D /* Products */ = {
+		52CC446F2F631126002845D4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5288428E2F61580C00AE258D /* Iceberg Metaphor Builder.app */,
+				52CC446E2F631126002845D4 /* FixIcebergMetaphorBuilder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,75 +54,75 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5288428D2F61580C00AE258D /* Iceberg Metaphor Builder */ = {
+		52CC446D2F631126002845D4 /* FixIcebergMetaphorBuilder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 528842A52F61580E00AE258D /* Build configuration list for PBXNativeTarget "Iceberg Metaphor Builder" */;
+			buildConfigurationList = 52CC44852F631127002845D4 /* Build configuration list for PBXNativeTarget "FixIcebergMetaphorBuilder" */;
 			buildPhases = (
-				5288428A2F61580C00AE258D /* Sources */,
-				5288428B2F61580C00AE258D /* Frameworks */,
-				5288428C2F61580C00AE258D /* Resources */,
+				52CC446A2F631126002845D4 /* Sources */,
+				52CC446B2F631126002845D4 /* Frameworks */,
+				52CC446C2F631126002845D4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				528842902F61580C00AE258D /* Iceberg Metaphor Builder */,
+				52CC44702F631126002845D4 /* FixIcebergMetaphorBuilder */,
 			);
-			name = "Iceberg Metaphor Builder";
+			name = FixIcebergMetaphorBuilder;
 			packageProductDependencies = (
 			);
-			productName = "Iceberg Metaphor Builder";
-			productReference = 5288428E2F61580C00AE258D /* Iceberg Metaphor Builder.app */;
+			productName = FixIcebergMetaphorBuilder;
+			productReference = 52CC446E2F631126002845D4 /* FixIcebergMetaphorBuilder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		528842862F61580C00AE258D /* Project object */ = {
+		52CC44662F631125002845D4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					5288428D2F61580C00AE258D = {
+					52CC446D2F631126002845D4 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = 528842892F61580C00AE258D /* Build configuration list for PBXProject "Iceberg Metaphor Builder" */;
+			buildConfigurationList = 52CC44692F631125002845D4 /* Build configuration list for PBXProject "FixIcebergMetaphorBuilder" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 528842852F61580C00AE258D;
+			mainGroup = 52CC44652F631125002845D4;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 5288428F2F61580C00AE258D /* Products */;
+			productRefGroup = 52CC446F2F631126002845D4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5288428D2F61580C00AE258D /* Iceberg Metaphor Builder */,
+				52CC446D2F631126002845D4 /* FixIcebergMetaphorBuilder */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5288428C2F61580C00AE258D /* Resources */ = {
+		52CC446C2F631126002845D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52CB1DA22F61EFFD004EE8D5 /* button.mp3 in Resources */,
+				52CC44BF2F631166002845D4 /* button.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5288428A2F61580C00AE258D /* Sources */ = {
+		52CC446A2F631126002845D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -132,7 +132,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		528842A32F61580E00AE258D /* Debug */ = {
+		52CC44832F631127002845D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -184,7 +184,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -195,7 +195,7 @@
 			};
 			name = Debug;
 		};
-		528842A42F61580E00AE258D /* Release */ = {
+		52CC44842F631127002845D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -241,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -251,7 +251,7 @@
 			};
 			name = Release;
 		};
-		528842A62F61580E00AE258D /* Debug */ = {
+		52CC44862F631127002845D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -262,7 +262,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16;
@@ -271,7 +271,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.DefaultCompany.Iceberg-Metaphor-Builder";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DefaultCompany.FixIcebergMetaphorBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -283,7 +283,7 @@
 			};
 			name = Debug;
 		};
-		528842A72F61580E00AE258D /* Release */ = {
+		52CC44872F631127002845D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -294,7 +294,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16;
@@ -303,7 +303,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.DefaultCompany.Iceberg-Metaphor-Builder";
+				PRODUCT_BUNDLE_IDENTIFIER = com.DefaultCompany.FixIcebergMetaphorBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -318,25 +318,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		528842892F61580C00AE258D /* Build configuration list for PBXProject "Iceberg Metaphor Builder" */ = {
+		52CC44692F631125002845D4 /* Build configuration list for PBXProject "FixIcebergMetaphorBuilder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				528842A32F61580E00AE258D /* Debug */,
-				528842A42F61580E00AE258D /* Release */,
+				52CC44832F631127002845D4 /* Debug */,
+				52CC44842F631127002845D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		528842A52F61580E00AE258D /* Build configuration list for PBXNativeTarget "Iceberg Metaphor Builder" */ = {
+		52CC44852F631127002845D4 /* Build configuration list for PBXNativeTarget "FixIcebergMetaphorBuilder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				528842A62F61580E00AE258D /* Debug */,
-				528842A72F61580E00AE258D /* Release */,
+				52CC44862F631127002845D4 /* Debug */,
+				52CC44872F631127002845D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 528842862F61580C00AE258D /* Project object */;
+	rootObject = 52CC44662F631125002845D4 /* Project object */;
 }

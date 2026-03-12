@@ -4,7 +4,7 @@ import SwiftUI
 struct RootView: View {
     @StateObject private var router = AppRouter()
     @StateObject private var store = IcebergStore()
-    @State private var didFinishOnboarding: Bool = false
+    @AppStorage("didFinishOnboarding") private var didFinishOnboarding: Bool = false
 
     var body: some View {
         Group {
